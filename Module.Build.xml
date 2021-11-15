@@ -14,7 +14,7 @@
 		<MsSqlScript />
 	</Resources>
 	<Version/>
-	 <ImagePath>./experian.png</ImagePath>
+	 <ImagePath>./image.png</ImagePath>
 	<Description>The Experian Services Module allows the fetching and processing report data from both Experian and Clarity services. There 
 	are several types of report steps present that each provide a different set of data.</Description>
 </CreateModuleInfo>
