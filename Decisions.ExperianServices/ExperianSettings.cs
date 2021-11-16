@@ -38,12 +38,12 @@ namespace Decisions.ExperianServices
         [BooleanPropertyHidden(nameof(EnableExperian), false)]
         [ORMField]
         [PropertyClassification(4, "Credit Profile Client ID", "Experian")]
-        public string CreditProfileClientId { get; set; }
+        public string ExperianClientId { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableExperian), false)]
         [ORMField]
         [PropertyClassification(5, "Credit Profile Client Secret", "Experian")]
-        public string CreditProfileClientSecret { get; set; }
+        public string ExperianClientSecret { get; set; }
         
         [BooleanPropertyHidden(nameof(EnableExperian), false)]
         [ORMField]

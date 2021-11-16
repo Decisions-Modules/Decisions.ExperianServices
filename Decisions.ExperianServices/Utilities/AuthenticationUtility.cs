@@ -27,8 +27,8 @@ namespace Decisions.ExperianServices.Utilities
             
             switch (experianApi){
                 case ExperianApi.CreditProfile:
-                    request.ClientId = ModuleSettingsAccessor<ExperianSettings>.Instance.CreditProfileClientId;
-                    request.ClientSecret = ModuleSettingsAccessor<ExperianSettings>.Instance.CreditProfileClientSecret;
+                    request.ClientId = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientId;
+                    request.ClientSecret = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientSecret;
                     break;
                 case ExperianApi.Prequalification:
                     request.ClientId = ModuleSettingsAccessor<ExperianSettings>.Instance.PrequalificationClientId;
