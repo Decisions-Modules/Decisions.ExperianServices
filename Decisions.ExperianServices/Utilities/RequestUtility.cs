@@ -10,21 +10,21 @@ namespace Decisions.ExperianServices.Utilities
     /*
      * Utility Class for making Web Requests
      */
-    public class RequestUtility
+    public static class RequestUtility
     {
-        private readonly Log _log = new Log(ExperianConstants.LogCat);
-        public string RequestUrl { get; set; }
-        public string RequestMethod { get; set; }
-        public string RequestData { get; set; }
-        public string RequestContentType { get; set; }
-        public string ClientReferenceId { get; set; }
-        private string _oAuthToken;
+        private static readonly Log _log = new Log(ExperianConstants.LogCat);
+        public static string RequestUrl { get; set; }
+        public static string RequestMethod { get; set; }
+        public static string RequestData { get; set; }
+        public static string RequestContentType { get; set; }
+        public static string ClientReferenceId { get; set; }
+        private static string _oAuthToken;
 
        /*
         * Create an HTTP Web Request using the current values in 
         * RequestUrl, RequestMethod, RequestData, RequestContentType
         */
-        public HttpWebRequest CreateWebRequest(bool isAuthRequest)
+       private static HttpWebRequest CreateWebRequest(bool isAuthRequest)
         {
             //Setup the Request Data Stream
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(RequestUrl);
@@ -60,7 +60,7 @@ namespace Decisions.ExperianServices.Utilities
          * Execute an HTTP Request using the current values in 
          * RequestUrl, RequestMethod, RequestData, RequestContentType
          */
-        public HttpWebResponse ExecuteRequest(bool isAuthRequest)
+        public static HttpWebResponse ExecuteRequest(bool isAuthRequest)
         {
             HttpWebResponse response = null;
 
@@ -85,7 +85,7 @@ namespace Decisions.ExperianServices.Utilities
        /*
         * Execute the Authentication Request to set the Authentication Token.
         */
-        public void ExecuteAuthRequest()
+        public static void ExecuteAuthRequest()
         {
             try
             {
@@ -103,7 +103,7 @@ namespace Decisions.ExperianServices.Utilities
         /*
          * Get the string representation of an HTTP response.
          */
-        public string GetResponseString(HttpWebResponse response)
+        public static string GetResponseString(HttpWebResponse response)
         {
             string responseString = string.Empty;
             using (Stream dataStream = response.GetResponseStream())

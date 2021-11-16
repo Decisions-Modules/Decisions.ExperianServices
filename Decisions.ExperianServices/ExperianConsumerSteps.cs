@@ -1,24 +1,26 @@
 ﻿using Decisions.ExperianServices.ConsumerCreditProfile;
 using Decisions.ExperianServices.Dao.CreditReport;
+using Decisions.ExperianServices.Utilities;
 using DecisionsFramework;
 using DecisionsFramework.Design.Flow;
 
 namespace Decisions.ExperianServices
 {
-    [AutoRegisterMethodsOnClass(true, "Credit Profile", "Experian Steps", RegisterForAgents = true)]
+    [AutoRegisterMethodsOnClass(true, "Experian", "Credit Profile", RegisterForAgents = true)]
     class ExperianConsumerSteps
     {
-        private static readonly Log log = new Log(ExperianConstants.LogCat);
-        private static readonly ConsumerReportFetcher ConsumerReportFetcher = new ConsumerReportFetcher();
+        private static readonly Log Log = new(ExperianConstants.LogCat);
+        private static readonly AuthenticationUtility AuthenticationUtility = new();
+        private static readonly ConsumerReportFetcher ConsumerReportFetcher = new();
 
         public static ExperianCreditReportResponse ExperianConsumerCreditProfile(ExperianCreditReportRequest request)
         {
             //Executing Oauth2 Request
-            log.Debug("Executing Oauth2 Request");
-            ConsumerReportFetcher.ExecuteAuthRequest();
+            Log.Debug("Executing Oauth2 Request");
+            AuthenticationUtility.ExecuteAuthRequest(ExperianApi.CreditProfile);
 
             //Executing Credit Report Request
-            log.Debug("Executing Consumer Credit Report Fetch");
+            Log.Debug("Executing Consumer Credit Report Fetch");
             return ConsumerReportFetcher.ExecuteCreditReportRequest(request);
         } 
     }
