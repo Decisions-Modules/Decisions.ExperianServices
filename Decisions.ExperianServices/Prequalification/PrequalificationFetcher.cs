@@ -1,13 +1,13 @@
 ﻿using System.Net;
-using Decisions.ExperianServices.Dao.CreditReport;
+using Decisions.ExperianServices.Dao.Prequalification;
 using Decisions.ExperianServices.Utilities;
 using DecisionsFramework;
 using DecisionsFramework.ServiceLayer;
 using Newtonsoft.Json;
 
-namespace Decisions.ExperianServices.ConsumerCreditProfile
+namespace Decisions.ExperianServices.Prequalification
 {
-    public class ConsumerReportFetcher
+    public class PrequalificationFetcher
     {
         private readonly Log _log = new(ExperianConstants.LogCat);
         private static readonly AuthenticationUtility AuthenticationUtility = new();
@@ -17,9 +17,9 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
         };
 
         /*
-         * Execute a Consumer Credit Report Request
+         * Executes an Experian Prequalification Request
          */
-        public ExperianCreditReportResponse ExecuteCreditReportRequest(ExperianCreditReportRequest request)
+        public ExperianPrequalificationResponse ExecutePrequalificationRequest(ExperianPrequalificationRequest request)
         {
             string clientReferenceId = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
 
@@ -28,7 +28,7 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
                 return null;
             }
 
-            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/credit-profile/v2/credit-report");
+            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/prequal/v1/credit-score");
             RequestUtility.RequestMethod = "POST";
 
             string requestString = JsonConvert.SerializeObject(request, _jsonSettings);
@@ -44,7 +44,7 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
             {
                 string responseString = RequestUtility.GetResponseString(response);
                 JsonUtility.ParseAndLogJson(responseString);
-                return JsonConvert.DeserializeObject<ExperianCreditReportResponse>(responseString, _jsonSettings);
+                return JsonConvert.DeserializeObject<ExperianPrequalificationResponse>(responseString, _jsonSettings);
             }
 
             return null;

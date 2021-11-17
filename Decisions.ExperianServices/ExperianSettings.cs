@@ -37,53 +37,63 @@ namespace Decisions.ExperianServices
 
         [BooleanPropertyHidden(nameof(EnableExperian), false)]
         [ORMField]
-        [PropertyClassification(4, "API Client ID", "Experian")]
+        [PropertyClassification(4, "Credit Profile Client ID", "Experian")]
         public string ExperianClientId { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableExperian), false)]
         [ORMField]
-        [PropertyClassification(5, "API Client Secret", "Experian")]
+        [PropertyClassification(5, "Credit Profile Client Secret", "Experian")]
         public string ExperianClientSecret { get; set; }
+        
+        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        [ORMField]
+        [PropertyClassification(6, "Prequalification Client ID", "Experian")]
+        public string PrequalificationClientId { get; set; }
+
+        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        [ORMField]
+        [PropertyClassification(7, "Prequalification Client Secret", "Experian")]
+        public string PrequalificationClientSecret { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableExperian), false)]
         [WritableValue]
-        [PropertyClassification(6, "Enable Clarity", "Experian")]
+        [PropertyClassification(8, "Enable Clarity", "Experian")]
         public bool EnableClarity { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(7, "API Connection URL", "Clarity")]
+        [PropertyClassification(9, "API Connection URL", "Clarity")]
         public string ClarityApiUrl { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(8, "Client Reference ID", "Clarity")]
+        [PropertyClassification(10, "Client Reference ID", "Clarity")]
         public string ClarityClientReferenceId { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(9, "API Username", "Clarity")]
+        [PropertyClassification(11, "API Username", "Clarity")]
         public string ClarityUsername { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(10, "API Password", "Clarity")]
+        [PropertyClassification(12, "API Password", "Clarity")]
         [PasswordText]
         public string ClarityPassword { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(11, "API Client ID", "Clarity")]
+        [PropertyClassification(13, "API Client ID", "Clarity")]
         public string ClarityClientId { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(12, "API Client Secret", "Clarity")]
+        [PropertyClassification(14, "API Client Secret", "Clarity")]
         public string ClarityClientSecret { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [WritableValue]
-        [PropertyClassification(13, "Enable Experian", "Clarity")]
+        [PropertyClassification(15, "Enable Experian", "Clarity")]
         public bool EnableExperian { get; set; } = true;
 
         public void Initialize()

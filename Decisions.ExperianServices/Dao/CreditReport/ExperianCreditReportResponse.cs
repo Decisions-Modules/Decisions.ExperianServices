@@ -6,7 +6,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 {
     [DataContract]
     [Writable]
-    public partial class ExperianCreditReportResponse
+    public class ExperianCreditReportResponse
     {
         [DataMember]
         [WritableValue]
@@ -16,7 +16,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class CreditProfile
+    public class CreditProfile
     {
         [JsonProperty("addressInformation")]
         public AddressInformation[] AddressInformation { get; set; }
@@ -77,7 +77,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class AddressInformation
+    public class AddressInformation
     {
         [JsonProperty("censusGeoCode")]
         public string CensusGeoCode { get; set; }
@@ -124,7 +124,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ConsumerAssistanceReferralAddress
+    public class ConsumerAssistanceReferralAddress
     {
         [JsonProperty("cityStateZip")]
         public string CityStateZip { get; set; }
@@ -147,7 +147,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ConsumerIdentity
+    public class ConsumerIdentity
     {
         [JsonProperty("dob")]
         public FullDob Dob { get; set; }
@@ -161,7 +161,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class FullDob
+    public class FullDob
     {
         [JsonProperty("day")]
         public string Day { get; set; }
@@ -175,7 +175,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ResponseName
+    public class ResponseName
     {
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
@@ -192,7 +192,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ResponsePhone
+    public class ResponsePhone
     {
         [JsonProperty("number")]
         public string Number { get; set; }
@@ -206,7 +206,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class DirectCheck
+    public class DirectCheck
     {
         [JsonProperty("subscriberAddress")]
         public string SubscriberAddress { get; set; }
@@ -232,7 +232,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class EmploymentInformation
+    public class EmploymentInformation
     {
         [JsonProperty("addressExtraLine")]
         public string AddressExtraLine { get; set; }
@@ -261,7 +261,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class FraudShield
+    public class FraudShield
     {
         [JsonProperty("addressCount")]
         public string AddressCount { get; set; }
@@ -308,7 +308,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class FraudShieldIndicators
+    public class FraudShieldIndicators
     {
         [JsonProperty("indicator")]
         public string[] Indicator { get; set; }
@@ -316,7 +316,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class InformationalMessage
+    public class InformationalMessage
     {
         [JsonProperty("messageNumber")]
         public string MessageNumber { get; set; }
@@ -330,7 +330,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class Inquiry
+    public class Inquiry
     {
         [JsonProperty("amount")]
         public string Amount { get; set; }
@@ -356,7 +356,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class M1A
+    public class M1A
     {
         [JsonProperty("messageNumber")]
         public string MessageNumber { get; set; }
@@ -367,7 +367,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class Ofac
+    public class Ofac
     {
         [JsonProperty("messageNumber")]
         public string MessageNumber { get; set; }
@@ -378,7 +378,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ResponseSummaries
+    public class ResponseSummaries
     {
         [JsonProperty("summaryType")]
         public string SummaryType { get; set; }
@@ -389,7 +389,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class Attributes
+    public class Attributes
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -400,7 +400,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class PublicRecord
+    public class PublicRecord
     {
         [JsonProperty("adjustmentPercent")]
         public string AdjustmentPercent { get; set; }
@@ -453,7 +453,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class RiskModel
+    public class RiskModel
     {
         [JsonProperty("evaluation")]
         public string Evaluation { get; set; }
@@ -473,7 +473,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ScoreFactors
+    public class ScoreFactors
     {
         [JsonProperty("importance")]
         public string Importance { get; set; }
@@ -484,7 +484,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ResponseSsn
+    public class ResponseSsn
     {
         [JsonProperty("number")]
         public string Number { get; set; }
@@ -498,7 +498,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class Statement
+    public class Statement
     {
         [JsonProperty("dateReported")]
         public string DateReported { get; set; }
@@ -512,7 +512,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class Summary
+    public class Summary
     {
         [JsonProperty("summaryType")]
         public string SummaryType { get; set; }
@@ -523,7 +523,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class Attribute
+    public class Attribute
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -536,7 +536,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class Tradeline
+    public class Tradeline
     {
         [JsonProperty("accountNumber")]
         public string AccountNumber { get; set; }
@@ -661,7 +661,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class EnhancedPaymentData
+    public class EnhancedPaymentData
     {
         [JsonProperty("actualPaymentAmount")]
         public string ActualPayoffAmount { get; set; }
@@ -744,7 +744,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class TrendedTrades
+    public class TrendedTrades
     {
         [JsonProperty("monthNumber")]
         public string MonthNumber { get; set; }
@@ -767,7 +767,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ModelAttribute
+    public class ModelAttribute
     {
         [JsonProperty("message")]
         public string Message { get; set; }
@@ -778,7 +778,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class ModelAttributes
+    public class ModelAttributes
     {
         [JsonProperty("modelTypeIndicator")]
         public string ModelTypeIndicator { get; set; }
@@ -795,7 +795,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class UniqueConsumerIdentifier
+    public class UniqueConsumerIdentifier
     {
         [JsonProperty("value")]
         public string Value { get; set; }
@@ -806,7 +806,7 @@ namespace Decisions.ExperianServices.Dao.CreditReport
 
     [DataContract]
     [Writable]
-    public partial class CreditProfileDetails
+    public class CreditProfileDetails
     {
         public string DisputedAccountsExcluded { get; set; }
 
