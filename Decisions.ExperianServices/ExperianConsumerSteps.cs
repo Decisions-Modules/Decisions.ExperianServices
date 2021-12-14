@@ -21,7 +21,18 @@ namespace Decisions.ExperianServices
 
             //Executing Credit Report Request
             Log.Debug("Executing Consumer Credit Report Fetch");
-            return ConsumerReportFetcher.ExecuteCreditReportRequest(request);
+            return ConsumerReportFetcher.ExecuteCreditProfileRequest(request, CreditProfileType.CreditReport);
         } 
+        
+        public static ExperianCreditReportResponse ExperianScoreOnlyPrequalification(ExperianCreditReportRequest request)
+        {
+            //Executing Oauth2 Request
+            Log.Debug("Executing Oauth2 Request");
+            AuthenticationUtility.ExecuteAuthRequest(ExperianApi.CreditProfile);
+
+            //Executing Credit Report Request
+            Log.Debug("Executing Consumer Credit Report Fetch");
+            return ConsumerReportFetcher.ExecuteCreditProfileRequest(request, CreditProfileType.ScoreOnlyPrequalification);
+        }
     }
 }

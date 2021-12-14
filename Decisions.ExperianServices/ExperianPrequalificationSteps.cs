@@ -13,15 +13,26 @@ namespace Decisions.ExperianServices
         private static readonly AuthenticationUtility AuthenticationUtility = new();
         private static readonly PrequalificationFetcher PrequalificationFetcher = new();
 
-        public static ExperianPrequalificationResponse ExperianPrequalification(ExperianPrequalificationRequest request)
+        public static ExperianPrequalificationResponse ExperianPrequalificationCreditScore(ExperianPrequalificationRequest request)
         {
             //Executing Oauth2 Request
             Log.Debug("Executing Oauth2 Request");
             AuthenticationUtility.ExecuteAuthRequest(ExperianApi.Prequalification);
 
             //Executing Prequalification Report Request
-            Log.Debug("Executing Prequalification Request");
-            return PrequalificationFetcher.ExecutePrequalificationRequest(request);
+            Log.Debug("Executing Prequalification Credit Score Request");
+            return PrequalificationFetcher.ExecutePrequalificationRequest(request, PrequalificationType.CreditScore);
+        } 
+        
+        public static ExperianPrequalificationResponse ExperianPrequalificationCreditReport(ExperianPrequalificationRequest request)
+        {
+            //Executing Oauth2 Request
+            Log.Debug("Executing Oauth2 Request");
+            AuthenticationUtility.ExecuteAuthRequest(ExperianApi.Prequalification);
+
+            //Executing Prequalification Report Request
+            Log.Debug("Executing Prequalification Credit Report Request");
+            return PrequalificationFetcher.ExecutePrequalificationRequest(request, PrequalificationType.CreditReport);
         } 
     }
 }

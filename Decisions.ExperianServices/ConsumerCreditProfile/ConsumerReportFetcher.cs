@@ -19,7 +19,7 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
         /*
          * Execute a Consumer Credit Report Request
          */
-        public ExperianCreditReportResponse ExecuteCreditReportRequest(ExperianCreditReportRequest request)
+        public ExperianCreditReportResponse ExecuteCreditProfileRequest(ExperianCreditReportRequest request, CreditProfileType type)
         {
             string clientReferenceId = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
 
@@ -27,8 +27,20 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
             {
                 return null;
             }
+            
+            string endpoint = "";
 
-            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/credit-profile/v2/credit-report");
+            switch(type)
+            {
+                case CreditProfileType.CreditReport:
+                    endpoint = "v2/credit-report";
+                    break;
+                case CreditProfileType.ScoreOnlyPrequalification:
+                    endpoint = "v1/score-only-prequalification";
+                    break;
+            }
+
+            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/credit-profile/{endpoint}");
             RequestUtility.RequestMethod = "POST";
 
             string requestString = JsonConvert.SerializeObject(request, _jsonSettings);

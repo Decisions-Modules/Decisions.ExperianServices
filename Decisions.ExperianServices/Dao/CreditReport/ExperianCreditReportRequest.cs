@@ -32,6 +32,11 @@ namespace Decisions.ExperianServices.Dao.CreditReport
         [WritableValue]
         [JsonProperty("freezeOverride")]
         public FreezeOverride FreezeOverride { get; set; }
+        
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("vendorData")]
+        public VendorData VendorData { get; set; }
 
         [DataMember]
         [WritableValue]
@@ -157,6 +162,21 @@ namespace Decisions.ExperianServices.Dao.CreditReport
         [WritableValue]
         [JsonProperty("taxRefundLoan")]
         public string TaxRefundLoan { get; set; }
+        
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("sureProfile")]
+        public string SureProfile { get; set; }
+        
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("incomeAndEmploymentReport")]
+        public string IncomeAndEmploymentReport { get; set; }
+        
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("incomeAndEmploymentReportData")]
+        public IncomeAndEmploymentReportData IncomeAndEmploymentReportData { get; set; }
     }
 
     [DataContract]
@@ -202,6 +222,21 @@ namespace Decisions.ExperianServices.Dao.CreditReport
         [WritableValue]
         [JsonProperty("verifySecondaryConsumerIdentifier")]
         public string VerifySecondaryConsumerIdentifier { get; set; }
+    }
+    
+    [DataContract]
+    [Writable]
+    public class IncomeAndEmploymentReportData
+    {
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("verifierName")]
+        public string VerifierName { get; set; } = string.Empty;
+
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("reportType")]
+        public string ReportType { get; set; }
     }
 
     [DataContract]
@@ -447,6 +482,21 @@ namespace Decisions.ExperianServices.Dao.CreditReport
         [WritableValue]
         [JsonProperty("secondaryApplFreezeOverrideCode")]
         public string SecondaryApplFreezeOverrideCode { get; set; }
+    }
+    
+    [DataContract]
+    [Writable]
+    public class VendorData
+    {
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("vendorNumber")]
+        public string VendorNumber { get; set; }
+
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("vendorVersion")]
+        public string VendorVersion { get; set; }
     }
 
     [DataContract]
