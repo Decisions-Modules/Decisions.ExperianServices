@@ -19,7 +19,8 @@ namespace Decisions.ExperianServices.Prequalification
         /*
          * Executes an Experian Prequalification Request
          */
-        public ExperianPrequalificationResponse ExecutePrequalificationRequest(ExperianPrequalificationRequest request)
+        public ExperianPrequalificationResponse ExecutePrequalificationRequest(ExperianPrequalificationRequest request, 
+            PrequalificationType type)
         {
             string clientReferenceId = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
 
@@ -27,8 +28,20 @@ namespace Decisions.ExperianServices.Prequalification
             {
                 return null;
             }
+            
+            string endpoint = "";
 
-            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/prequal/v1/credit-score");
+            switch(type)
+            {
+                case PrequalificationType.CreditScore:
+                    endpoint = "credit-score";
+                    break;
+                case PrequalificationType.CreditReport:
+                    endpoint = "credit-report";
+                    break;
+            }
+
+            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/prequal/v1/{endpoint}");
             RequestUtility.RequestMethod = "POST";
 
             string requestString = JsonConvert.SerializeObject(request, _jsonSettings);
