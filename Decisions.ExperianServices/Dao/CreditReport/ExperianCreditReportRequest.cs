@@ -92,6 +92,11 @@ namespace Decisions.ExperianServices.Dao.CreditReport
         [WritableValue]
         [JsonProperty("TAPS4Attributes")]
         public string Taps4Attributes { get; set; }
+        
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("liftPremium")]
+        public string LiftPremium { get; set; }
 
         [DataMember]
         [WritableValue]
