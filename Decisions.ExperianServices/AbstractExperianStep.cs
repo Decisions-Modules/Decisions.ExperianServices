@@ -17,7 +17,8 @@ namespace Decisions.ExperianServices
         protected static readonly Log Log = new(ExperianConstants.LogCat);
         
         protected const string RequestText = "Request";
-        protected const string ResponseText = "Response";
+        protected const string CreditReportResponseText = "CreditReportResponse";
+        protected const string PreQualificationResponseText = "PreQualificationReportResponse";
         private const string ClientReferenceIdText = "Client Reference ID";
         private const string ApiUsernameText = "API Username";
         private const string ApiPasswordText = "API Password";

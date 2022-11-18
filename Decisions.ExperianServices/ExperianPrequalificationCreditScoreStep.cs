@@ -28,7 +28,7 @@ namespace Decisions.ExperianServices
                 ClientReferenceId);
             Dictionary<string, object> results = new Dictionary<string, object>
             {
-                [ResponseText] = response
+                [PreQualificationResponseText] = response
             };
 
             return new ResultData("Result", results);
