@@ -43,14 +43,14 @@ namespace Decisions.ExperianServices
             List<ValidationIssue> issues = new List<ValidationIssue>(base.GetValidationIssues());
             
             if (OverrideCredentials && 
-                string.IsNullOrEmpty(ClientId) || 
-                string.IsNullOrEmpty(ClientSecret))
+                (string.IsNullOrEmpty(ClientId) || 
+                string.IsNullOrEmpty(ClientSecret)))
             {
                 issues.Add(new ValidationIssue("If Credentials are overridden, Client ID and Client Secret must be specified in the step properties."));
             }
             else if (!OverrideCredentials && 
-                     string.IsNullOrEmpty(ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientId) || 
-                     string.IsNullOrEmpty(ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientSecret))
+                     (string.IsNullOrEmpty(ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientId) || 
+                     string.IsNullOrEmpty(ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientSecret)))
             {
                 issues.Add(new ValidationIssue("If Credentials are not overridden, Client ID and Client Secret must be specified in the Experian Settings."));
             }
