@@ -1,20 +1,18 @@
-﻿using System.Net;
-using Decisions.ExperianServices.Dao.CreditReport;
+using System.Net;
+using Decisions.ExperianServices.Dao.Verify;
 using Decisions.ExperianServices.Utilities;
-using DecisionsFramework;
 using DecisionsFramework.ServiceLayer;
 using Newtonsoft.Json;
 
-namespace Decisions.ExperianServices.ConsumerCreditProfile
+namespace Decisions.ExperianServices.Verify
 {
-    public class ConsumerReportFetcher : AbstractFetcher
+    public class VerifyFetcher : AbstractFetcher
     {
         /*
-         * Execute a Consumer Credit Report Request
+         * Executes an Experian Verify Request
          */
-        public static ExperianCreditReportResponse ExecuteCreditProfileRequest(
-            ExperianCreditReportRequest request, 
-            CreditProfileType type, 
+        public static ExperianVerifyResponse ExecuteVerifyRequest(ExperianVerifyRequest request, 
+            VerifyType type,
             bool overrideCredentials = false, 
             string clientReferenceId = "")
         {
@@ -29,15 +27,12 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
 
             switch(type)
             {
-                case CreditProfileType.CreditReport:
-                    endpoint = "v2/credit-report";
-                    break;
-                case CreditProfileType.ScoreOnlyPrequalification:
-                    endpoint = "v1/score-only-prequalification";
+                case VerifyType.VerifyPlus:
+                    endpoint = "experianverify";
                     break;
             }
 
-            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/credit-profile/{endpoint}");
+            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/{endpoint}");
             RequestUtility.RequestMethod = "POST";
 
             string requestString = JsonConvert.SerializeObject(request, JsonSettings);
@@ -53,7 +48,7 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
             {
                 string responseString = RequestUtility.GetResponseString(response);
                 JsonUtility.ParseAndLogJson(responseString);
-                return JsonConvert.DeserializeObject<ExperianCreditReportResponse>(responseString, JsonSettings);
+                return JsonConvert.DeserializeObject<ExperianVerifyResponse>(responseString, JsonSettings);
             }
 
             return null;

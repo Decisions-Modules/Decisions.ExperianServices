@@ -1,4 +1,5 @@
-﻿using DecisionsFramework.Data.ORMapper;
+﻿using System;
+using DecisionsFramework.Data.ORMapper;
 using DecisionsFramework.Design.ConfigurationStorage.Attributes;
 using DecisionsFramework.Design.Properties;
 using DecisionsFramework.Design.Properties.Attributes;
@@ -14,48 +15,47 @@ namespace Decisions.ExperianServices
 {
     public class ExperianSettings : AbstractModuleSettings, IInitializable
     {
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
         [ORMField]
         [PropertyClassification(0, "Experian API Connection URL", "Experian")]
         public string ExperianCoreApiUrl { get; set; }
-
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        
         [ORMField]
         [PropertyClassification(1, "Client Reference ID", "Experian")]
         public string ExperianClientReferenceId { get; set; }
-
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        
         [ORMField]
         [PropertyClassification(2, "API Username", "Experian")]
         public string ExperianUsername { get; set; }
-
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        
         [ORMField]
         [PropertyClassification(3, "API Password", "Experian")]
         [PasswordText]
         public string ExperianPassword { get; set; }
-
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        
         [ORMField]
         [PropertyClassification(4, "Credit Profile Client ID", "Experian")]
         public string ExperianClientId { get; set; }
-
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        
         [ORMField]
         [PropertyClassification(5, "Credit Profile Client Secret", "Experian")]
         public string ExperianClientSecret { get; set; }
         
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
         [ORMField]
         [PropertyClassification(6, "Prequalification Client ID", "Experian")]
         public string PrequalificationClientId { get; set; }
-
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        
         [ORMField]
         [PropertyClassification(7, "Prequalification Client Secret", "Experian")]
         public string PrequalificationClientSecret { get; set; }
-
-        [BooleanPropertyHidden(nameof(EnableExperian), false)]
+        
+        [ORMField]
+        [PropertyClassification(6, "Verify Client ID", "Experian")]
+        public string VerifyClientId { get; set; }
+        
+        [ORMField]
+        [PropertyClassification(7, "Verify Client Secret", "Experian")]
+        public string VerifyClientSecret { get; set; }
+        
         [WritableValue]
         [PropertyClassification(8, "Enable Clarity", "Experian")]
         public bool EnableClarity { get; set; }
@@ -91,11 +91,6 @@ namespace Decisions.ExperianServices
         [PropertyClassification(14, "API Client Secret", "Clarity")]
         public string ClarityClientSecret { get; set; }
 
-        [BooleanPropertyHidden(nameof(EnableClarity), false)]
-        [WritableValue]
-        [PropertyClassification(15, "Enable Experian", "Clarity")]
-        public bool EnableExperian { get; set; } = true;
-
         public void Initialize()
         {
             // Read the Settings here
@@ -114,12 +109,14 @@ namespace Decisions.ExperianServices
                                    userAccount.IsAdministrator();
 
             if (canAdministrate)
+            {
                 return new BaseActionType[]
                 {
                     new EditEntityAction(GetType(), "Edit", null),
                 };
-
-            return new BaseActionType[0];
+            }
+            
+            return Array.Empty<BaseActionType>();
         }
     }
 }

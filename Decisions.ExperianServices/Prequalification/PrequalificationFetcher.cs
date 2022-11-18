@@ -1,20 +1,13 @@
 ﻿using System.Net;
 using Decisions.ExperianServices.Dao.Prequalification;
 using Decisions.ExperianServices.Utilities;
-using DecisionsFramework;
 using DecisionsFramework.ServiceLayer;
 using Newtonsoft.Json;
 
 namespace Decisions.ExperianServices.Prequalification
 {
-    public class PrequalificationFetcher
+    public class PrequalificationFetcher : AbstractFetcher
     {
-        private static readonly Log Log = new(ExperianConstants.LogCat);
-        private static readonly JsonSerializerSettings JsonSettings = new()
-        {
-            NullValueHandling = NullValueHandling.Ignore
-        };
-
         /*
          * Executes an Experian Prequalification Request
          */

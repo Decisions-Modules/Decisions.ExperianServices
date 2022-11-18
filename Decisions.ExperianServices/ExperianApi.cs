@@ -3,6 +3,7 @@
     public enum ExperianApi
     {
         CreditProfile,
-        Prequalification
+        Prequalification,
+        Verify
     }
 }

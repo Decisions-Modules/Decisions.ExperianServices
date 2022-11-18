@@ -19,6 +19,7 @@ namespace Decisions.ExperianServices
         protected const string RequestText = "Request";
         protected const string CreditReportResponseText = "CreditReportResponse";
         protected const string PreQualificationResponseText = "PreQualificationReportResponse";
+        protected const string VerifyResponseText = "VerifyResponse";
         private const string ClientReferenceIdText = "Client Reference ID";
         private const string ApiUsernameText = "API Username";
         private const string ApiPasswordText = "API Password";
