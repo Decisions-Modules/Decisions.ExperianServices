@@ -33,7 +33,7 @@ namespace Decisions.ExperianServices
                 return new []
                 {
                     new OutcomeScenarioData("Result",
-                        new DataDescription(typeof(ExperianVerifyResponse), CreditReportResponseText))
+                        new DataDescription(typeof(ExperianVerifyResponse), VerifyResponseText))
                 };
             }
         }
