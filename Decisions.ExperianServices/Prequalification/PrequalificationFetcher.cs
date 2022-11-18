@@ -9,9 +9,8 @@ namespace Decisions.ExperianServices.Prequalification
 {
     public class PrequalificationFetcher
     {
-        private readonly Log _log = new(ExperianConstants.LogCat);
-        private static readonly AuthenticationUtility AuthenticationUtility = new();
-        private readonly JsonSerializerSettings _jsonSettings = new()
+        private static readonly Log Log = new(ExperianConstants.LogCat);
+        private static readonly JsonSerializerSettings JsonSettings = new()
         {
             NullValueHandling = NullValueHandling.Ignore
         };
@@ -19,10 +18,12 @@ namespace Decisions.ExperianServices.Prequalification
         /*
          * Executes an Experian Prequalification Request
          */
-        public ExperianPrequalificationResponse ExecutePrequalificationRequest(ExperianPrequalificationRequest request, 
-            PrequalificationType type)
+        public static ExperianPrequalificationResponse ExecutePrequalificationRequest(ExperianPrequalificationRequest request, 
+            PrequalificationType type,
+            bool overrideCredentials = false, 
+            string clientReferenceId = "")
         {
-            string clientReferenceId = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
+            clientReferenceId = overrideCredentials ? clientReferenceId : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
 
             if (string.IsNullOrEmpty(clientReferenceId))
             {
@@ -44,8 +45,8 @@ namespace Decisions.ExperianServices.Prequalification
             RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/prequal/v1/{endpoint}");
             RequestUtility.RequestMethod = "POST";
 
-            string requestString = JsonConvert.SerializeObject(request, _jsonSettings);
-            _log.Debug($"Request String: {requestString}");
+            string requestString = JsonConvert.SerializeObject(request, JsonSettings);
+            Log.Debug($"Request String: {requestString}");
 
             RequestUtility.RequestData = requestString;
             RequestUtility.RequestContentType = "application/json";
@@ -57,7 +58,7 @@ namespace Decisions.ExperianServices.Prequalification
             {
                 string responseString = RequestUtility.GetResponseString(response);
                 JsonUtility.ParseAndLogJson(responseString);
-                return JsonConvert.DeserializeObject<ExperianPrequalificationResponse>(responseString, _jsonSettings);
+                return JsonConvert.DeserializeObject<ExperianPrequalificationResponse>(responseString, JsonSettings);
             }
 
             return null;

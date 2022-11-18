@@ -12,7 +12,7 @@ namespace Decisions.ExperianServices.Utilities
      */
     public static class RequestUtility
     {
-        private static readonly Log _log = new Log(ExperianConstants.LogCat);
+        private static readonly Log Log = new Log(ExperianConstants.LogCat);
         public static string RequestUrl { get; set; }
         public static string RequestMethod { get; set; }
         public static string RequestData { get; set; }
@@ -68,14 +68,14 @@ namespace Decisions.ExperianServices.Utilities
             {
                 HttpWebRequest request = CreateWebRequest(isAuthRequest);
                 WebResponse webResponse = request.GetResponse();
-                if (webResponse is HttpWebResponse)
+                if (webResponse is HttpWebResponse httpWebResponse)
                 {
-                    response = webResponse as HttpWebResponse;
+                    response = httpWebResponse;
                 }
             }
             catch (WebException ex)
             {
-                _log.Error(ex, "There was an issue executing the request.");
+                Log.Error(ex, "There was an issue executing the request.");
                 throw;
             }
             
@@ -92,11 +92,12 @@ namespace Decisions.ExperianServices.Utilities
                 HttpWebResponse response = (HttpWebResponse) CreateWebRequest(true).GetResponse();
                 string responseString = GetResponseString(response);
                 JsonUtility.ParseAndLogJson(responseString);
-                _oAuthToken = JsonConvert.DeserializeObject<OAuthResponse>(responseString).AccessToken;
+                _oAuthToken = JsonConvert.DeserializeObject<OAuthResponse>(responseString)?.AccessToken;
             }
             catch (Exception ex)
             {
-                _log.Error(ex, "There was an error executing the authentication request.");
+                Log.Error(ex, "There was an error executing the authentication request.");
+                throw new BusinessRuleException(ex.Message);
             }
         }
 

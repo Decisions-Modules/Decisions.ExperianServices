@@ -1,4 +1,5 @@
-﻿using Decisions.ExperianServices.Dao.Prequalification;
+﻿using System;
+using Decisions.ExperianServices.Dao.Prequalification;
 using Decisions.ExperianServices.Prequalification;
 using Decisions.ExperianServices.Utilities;
 using DecisionsFramework;
@@ -10,9 +11,10 @@ namespace Decisions.ExperianServices
     class ExperianPrequalificationSteps
     {
         private static readonly Log Log = new(ExperianConstants.LogCat);
-        private static readonly AuthenticationUtility AuthenticationUtility = new();
         private static readonly PrequalificationFetcher PrequalificationFetcher = new();
 
+        [Obsolete]
+        [ExcludeMethodOnAutoRegister]
         public static ExperianPrequalificationResponse ExperianPrequalificationCreditScore(ExperianPrequalificationRequest request)
         {
             //Executing Oauth2 Request
@@ -24,6 +26,8 @@ namespace Decisions.ExperianServices
             return PrequalificationFetcher.ExecutePrequalificationRequest(request, PrequalificationType.CreditScore);
         } 
         
+        [Obsolete]
+        [ExcludeMethodOnAutoRegister]
         public static ExperianPrequalificationResponse ExperianPrequalificationCreditReport(ExperianPrequalificationRequest request)
         {
             //Executing Oauth2 Request

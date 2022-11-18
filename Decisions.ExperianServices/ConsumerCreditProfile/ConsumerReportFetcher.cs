@@ -9,9 +9,8 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
 {
     public class ConsumerReportFetcher
     {
-        private readonly Log _log = new(ExperianConstants.LogCat);
-        private static readonly AuthenticationUtility AuthenticationUtility = new();
-        private readonly JsonSerializerSettings _jsonSettings = new()
+        private static readonly Log Log = new(ExperianConstants.LogCat);
+        private static readonly JsonSerializerSettings JsonSettings = new()
         {
             NullValueHandling = NullValueHandling.Ignore
         };
@@ -19,9 +18,13 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
         /*
          * Execute a Consumer Credit Report Request
          */
-        public ExperianCreditReportResponse ExecuteCreditProfileRequest(ExperianCreditReportRequest request, CreditProfileType type)
+        public static ExperianCreditReportResponse ExecuteCreditProfileRequest(
+            ExperianCreditReportRequest request, 
+            CreditProfileType type, 
+            bool overrideCredentials = false, 
+            string clientReferenceId = "")
         {
-            string clientReferenceId = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
+            clientReferenceId = overrideCredentials ? clientReferenceId : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
 
             if (string.IsNullOrEmpty(clientReferenceId))
             {
@@ -43,8 +46,8 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
             RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/credit-profile/{endpoint}");
             RequestUtility.RequestMethod = "POST";
 
-            string requestString = JsonConvert.SerializeObject(request, _jsonSettings);
-            _log.Debug($"Request String: {requestString}");
+            string requestString = JsonConvert.SerializeObject(request, JsonSettings);
+            Log.Debug($"Request String: {requestString}");
 
             RequestUtility.RequestData = requestString;
             RequestUtility.RequestContentType = "application/json";
@@ -56,7 +59,7 @@ namespace Decisions.ExperianServices.ConsumerCreditProfile
             {
                 string responseString = RequestUtility.GetResponseString(response);
                 JsonUtility.ParseAndLogJson(responseString);
-                return JsonConvert.DeserializeObject<ExperianCreditReportResponse>(responseString, _jsonSettings);
+                return JsonConvert.DeserializeObject<ExperianCreditReportResponse>(responseString, JsonSettings);
             }
 
             return null;

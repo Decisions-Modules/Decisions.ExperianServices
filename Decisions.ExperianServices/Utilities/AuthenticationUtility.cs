@@ -7,32 +7,54 @@ namespace Decisions.ExperianServices.Utilities
 {
     public class AuthenticationUtility
     {
-        private readonly Log _log = new(ExperianConstants.LogCat);
+        private static readonly Log Log = new(ExperianConstants.LogCat);
         private const string BaseUrl = "https://sandbox-us-api.experian.com";
-        private readonly JsonSerializerSettings _jsonSettings = new()
+        private static readonly JsonSerializerSettings JsonSettings = new()
         {
             NullValueHandling = NullValueHandling.Ignore
         };
         
-        public void ExecuteAuthRequest(ExperianApi experianApi)
+        public static void ExecuteAuthRequest(
+            ExperianApi experianApi, 
+            bool overrideCredentials = false, 
+            string userName = "", 
+            string password = "", 
+            string clientId = "", 
+            string clientSecret = "")
         {
             RequestUtility.RequestUrl = string.Format($"{DetermineConnectionString()}/oauth2/v1/token");
             RequestUtility.RequestMethod = "POST";
 
+            string finalUserName = overrideCredentials
+                ? userName
+                : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianUsername;
+            
+            string finalPassword = overrideCredentials
+                ? password
+                : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianPassword;
+            
+            string finalClientId = overrideCredentials
+                ? clientId
+                : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientId;
+            
+            string finalClientSecret = overrideCredentials
+                ? clientSecret
+                : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientSecret;
+
             OAuthRequest request = new OAuthRequest
             {
-                Username = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianUsername,
-                Password = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianPassword
+                Username = finalUserName,
+                Password = finalPassword
             };
             
             switch (experianApi){
                 case ExperianApi.CreditProfile:
-                    request.ClientId = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientId;
-                    request.ClientSecret = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientSecret;
+                    request.ClientId = overrideCredentials ? finalClientId : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientId;
+                    request.ClientSecret = overrideCredentials ? finalClientSecret : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientSecret;
                     break;
                 case ExperianApi.Prequalification:
-                    request.ClientId = ModuleSettingsAccessor<ExperianSettings>.Instance.PrequalificationClientId;
-                    request.ClientSecret = ModuleSettingsAccessor<ExperianSettings>.Instance.PrequalificationClientSecret;
+                    request.ClientId = overrideCredentials ? finalClientId : ModuleSettingsAccessor<ExperianSettings>.Instance.PrequalificationClientId;
+                    request.ClientSecret = overrideCredentials ? finalClientId : ModuleSettingsAccessor<ExperianSettings>.Instance.PrequalificationClientSecret;
                     break;
             }
 
@@ -42,15 +64,15 @@ namespace Decisions.ExperianServices.Utilities
                 return;
             }
 
-            string requestString = JsonConvert.SerializeObject(request, Formatting.None, _jsonSettings);
-            _log.Debug($"Request String: {requestString}");
+            string requestString = JsonConvert.SerializeObject(request, Formatting.None, JsonSettings);
+            Log.Debug($"Request String: {requestString}");
 
             RequestUtility.RequestData = requestString;
             RequestUtility.RequestContentType = "application/json";
             RequestUtility.ExecuteAuthRequest();
         }
         
-        public string DetermineConnectionString()
+        public static string DetermineConnectionString()
         {
             string urlFromSystemSettings = ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianCoreApiUrl;
             if (string.IsNullOrEmpty(urlFromSystemSettings))

@@ -13,8 +13,8 @@
 		<ObjectsToImport />     	
 		<MsSqlScript />
 	</Resources>
-	<Version>8.2.0</Version>
-	 <ImagePath>./image.png</ImagePath>
+	<Version>8.8.0</Version>
+	<ImagePath>./image.png</ImagePath>
 	<Description>The Experian Services Module allows the fetching and processing report data from both Experian and Clarity services. There 
 	are several types of report steps present that each provide a different set of data.</Description>
 </CreateModuleInfo>
