@@ -7,7 +7,7 @@ namespace Decisions.ExperianServices.Dao.Verify
 {
     [DataContract]
     [Writable]
-    public class ExperianVerifyRequest : ExperianCreditReportRequest
+    public class ExperianVerifyRequest
     {
         [DataMember]
         [WritableValue]
