@@ -6,29 +6,38 @@ using DecisionsFramework.Design.Flow;
 
 namespace Decisions.ExperianServices
 {
-    [AutoRegisterStep("Experian Verify Plus", "Experian", "Verify")]
-    public class ExperianVerifyPlusStep : AbstractVerifyStep
+    [AutoRegisterStep("Experian Verify", "Experian", "Verify")]
+    public class ExperianVerifyStep : AbstractVerifyStep
     {
         public override ResultData Run(StepStartData data)
         {
             ExperianVerifyRequest request = data[RequestText] as ExperianVerifyRequest;
 
             SetUpInputVariables(data);
-
+            
             //Executing Oauth2 Request
             Log.Debug("Executing Oauth2 Request");
             AuthenticationUtility.ExecuteAuthRequest(ExperianApi.Verify, OverrideCredentials, UserName, Password, ClientId, ClientSecret);
 
+            if (OverrideCredentials)
+            {
+                if (data.ContainsKey(SubCodeText) && data[SubCodeText] != null)
+                {
+                    SubCode = data[SubCodeText] as string;
+                }
+            }
+            
             //Executing Verify Request
             Log.Debug("Executing Verify Fetch");
             ExperianVerifyResponse response = VerifyFetcher.ExecuteVerifyRequest(
                 request, 
-                VerifyType.VerifyPlus, 
+                VerifyType.Verify, 
                 OverrideCredentials, 
-                ClientReferenceId);
+                ClientReferenceId, 
+                SubCode);
             Dictionary<string, object> results = new Dictionary<string, object>
             {
-                [CreditReportResponseText] = response
+                [VerifyResponseText] = response
             };
 
             return new ResultData("Result", results);

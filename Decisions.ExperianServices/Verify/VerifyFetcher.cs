@@ -14,9 +14,12 @@ namespace Decisions.ExperianServices.Verify
         public static ExperianVerifyResponse ExecuteVerifyRequest(ExperianVerifyRequest request, 
             VerifyType type,
             bool overrideCredentials = false, 
-            string clientReferenceId = "")
+            string clientReferenceId = "", 
+            string subCode = "")
         {
             clientReferenceId = overrideCredentials ? clientReferenceId : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
+            
+            subCode = overrideCredentials ? subCode : ModuleSettingsAccessor<ExperianSettings>.Instance.VerifySubCode;
 
             if (string.IsNullOrEmpty(clientReferenceId))
             {
@@ -27,12 +30,12 @@ namespace Decisions.ExperianServices.Verify
 
             switch(type)
             {
-                case VerifyType.VerifyPlus:
+                case VerifyType.Verify:
                     endpoint = "experianverify";
                     break;
             }
 
-            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/{endpoint}");
+            RequestUtility.RequestUrl = string.Format($"{AuthenticationUtility.DetermineConnectionString()}/consumerservices/verification/v2/{endpoint}");
             RequestUtility.RequestMethod = "POST";
 
             string requestString = JsonConvert.SerializeObject(request, JsonSettings);
@@ -41,6 +44,7 @@ namespace Decisions.ExperianServices.Verify
             RequestUtility.RequestData = requestString;
             RequestUtility.RequestContentType = "application/json";
             RequestUtility.ClientReferenceId = clientReferenceId;
+            RequestUtility.SubCode = subCode;
 
             HttpWebResponse response = RequestUtility.ExecuteRequest(false);
 

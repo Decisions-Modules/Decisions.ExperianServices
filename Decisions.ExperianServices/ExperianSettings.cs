@@ -56,39 +56,43 @@ namespace Decisions.ExperianServices
         [PropertyClassification(9, "Verify Client Secret", "Experian")]
         public string VerifyClientSecret { get; set; }
         
+        [ORMField]
+        [PropertyClassification(10, "Verify Sub Code", "Experian")]
+        public string VerifySubCode { get; set; }
+        
         [WritableValue]
-        [PropertyClassification(10, "Enable Clarity", "Experian")]
+        [PropertyClassification(11, "Enable Clarity", "Experian")]
         public bool EnableClarity { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(11, "API Connection URL", "Clarity")]
+        [PropertyClassification(12, "API Connection URL", "Clarity")]
         public string ClarityApiUrl { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(12, "Client Reference ID", "Clarity")]
+        [PropertyClassification(13, "Client Reference ID", "Clarity")]
         public string ClarityClientReferenceId { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(13, "API Username", "Clarity")]
+        [PropertyClassification(14, "API Username", "Clarity")]
         public string ClarityUsername { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(14, "API Password", "Clarity")]
+        [PropertyClassification(15, "API Password", "Clarity")]
         [PasswordText]
         public string ClarityPassword { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(15, "API Client ID", "Clarity")]
+        [PropertyClassification(16, "API Client ID", "Clarity")]
         public string ClarityClientId { get; set; }
 
         [BooleanPropertyHidden(nameof(EnableClarity), false)]
         [ORMField]
-        [PropertyClassification(16, "API Client Secret", "Clarity")]
+        [PropertyClassification(17, "API Client Secret", "Clarity")]
         public string ClarityClientSecret { get; set; }
 
         public void Initialize()

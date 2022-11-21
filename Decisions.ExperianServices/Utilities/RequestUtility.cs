@@ -18,6 +18,7 @@ namespace Decisions.ExperianServices.Utilities
         public static string RequestData { get; set; }
         public static string RequestContentType { get; set; }
         public static string ClientReferenceId { get; set; }
+        public static string SubCode { get; set; }
         private static string _oAuthToken;
 
        /*
@@ -34,8 +35,13 @@ namespace Decisions.ExperianServices.Utilities
             {
                 request.Headers.Add("authorization", "Bearer " + _oAuthToken);
                 request.Headers.Add("clientReferenceId", ClientReferenceId);
-            }
 
+                if (!string.IsNullOrEmpty(SubCode))
+                {
+                    request.Headers.Add("subcode", SubCode);
+                }
+            }
+            
             //Only set the Accept, Content Type, Method, and Data if it's a POST request.
             if (RequestMethod.Equals("POST"))
             {
