@@ -29,12 +29,18 @@ namespace Decisions.ExperianServices.Dao.Verify
         [JsonProperty("resellerInfo")]
         public new ResellerInfo ResellerInfo { get; set; }
         
+        [DataMember]
+        [WritableValue]
         [JsonProperty("reportType")]
         public string ReportType { get; set; }
 
+        [DataMember]
+        [WritableValue]
         [JsonProperty("vendorData")]
         public new VendorData VendorData { get; set; }
 
+        [DataMember]
+        [WritableValue]
         [JsonProperty("customOptions")]
         public new CustomOptions CustomOptions { get; set; }
     }
