@@ -12,22 +12,22 @@ namespace Decisions.ExperianServices.Dao.Verify
         [DataMember]
         [WritableValue]
         [JsonProperty("consumerPii")]
-        public new ConsumerPii ConsumerPii { get; set; }
+        public ConsumerPii ConsumerPii { get; set; }
 
         [DataMember]
         [WritableValue]
         [JsonProperty("requestor")]
-        public new Requestor Requestor { get; set; }
+        public Requestor Requestor { get; set; }
 
         [DataMember]
         [WritableValue]
         [JsonProperty("permissiblePurpose")]
-        public new PermissiblePurpose PermissiblePurpose { get; set; }
+        public PermissiblePurpose PermissiblePurpose { get; set; }
 
         [DataMember]
         [WritableValue]
         [JsonProperty("resellerInfo")]
-        public new ResellerInfo ResellerInfo { get; set; }
+        public ResellerInfo ResellerInfo { get; set; }
         
         [DataMember]
         [WritableValue]
@@ -37,17 +37,17 @@ namespace Decisions.ExperianServices.Dao.Verify
         [DataMember]
         [WritableValue]
         [JsonProperty("vendorData")]
-        public new VendorData VendorData { get; set; }
+        public VendorData VendorData { get; set; }
 
         [DataMember]
         [WritableValue]
         [JsonProperty("customOptions")]
-        public new CustomOptions CustomOptions { get; set; }
+        public CustomOptions CustomOptions { get; set; }
     }
     
     [DataContract]
     [Writable]
-    public class ConsumerPii
+    public partial class ConsumerPii
     {
         [DataMember]
         [WritableValue]
