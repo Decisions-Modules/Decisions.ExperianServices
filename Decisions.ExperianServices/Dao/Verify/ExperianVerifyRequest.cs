@@ -117,7 +117,7 @@ namespace Decisions.ExperianServices.Dao.Verify
         [DataMember]
         [WritableValue]
         [JsonProperty("zipCode")]
-        public long ZipCode { get; set; }
+        public string ZipCode { get; set; }
     }
     
     [DataContract]
