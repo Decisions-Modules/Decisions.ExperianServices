@@ -89,8 +89,7 @@ namespace Decisions.ExperianServices.Utilities
                     errorContent = new StreamReader(ex.Response?.GetResponseStream()).ReadToEnd();
                 }
                 
-                Log.Error(ex, errorContent);
-                throw;
+                throw new BusinessRuleException(errorContent);
             }
             
             return response;
