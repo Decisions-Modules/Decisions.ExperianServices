@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using Decisions.ExperianServices.Dao.Auth;
 using DecisionsFramework;
@@ -81,7 +82,14 @@ namespace Decisions.ExperianServices.Utilities
             }
             catch (WebException ex)
             {
-                Log.Error(ex, "There was an issue executing the request.");
+                string errorContent = "There was an issue processing the request";
+
+                if (ex.Response?.GetResponseStream() != null)
+                {
+                    errorContent = new StreamReader(ex.Response?.GetResponseStream()).ReadToEnd();
+                }
+                
+                Log.Error(ex, errorContent);
                 throw;
             }
             
