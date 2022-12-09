@@ -51,10 +51,9 @@ namespace Decisions.ExperianServices
             
             if (OverrideCredentials && 
                 (string.IsNullOrEmpty(ClientId) || 
-                 string.IsNullOrEmpty(ClientSecret) || 
-                 string.IsNullOrEmpty(SubCode)))
+                 string.IsNullOrEmpty(ClientSecret)))
             {
-                issues.Add(new ValidationIssue("If Credentials are overridden, Client ID, Client Secret, and Sub Code must be specified in the step properties."));
+                issues.Add(new ValidationIssue("If Credentials are overridden, Client ID and Client Secret must be specified in the step properties."));
             }
             else if (!OverrideCredentials && 
                      (string.IsNullOrEmpty(ModuleSettingsAccessor<ExperianSettings>.Instance.VerifyClientId) || 
