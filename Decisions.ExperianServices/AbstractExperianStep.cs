@@ -51,19 +51,19 @@ namespace Decisions.ExperianServices
         
         [PasswordText]
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
-        [PropertyClassification(1, "Experian Password", "Settings")]
+        [PropertyClassification(2, "Experian Password", "Settings")]
         public string Password { get; set; }
         
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
-        [PropertyClassification(1, "Experian Client ID", "Settings")]
+        [PropertyClassification(3, "Experian Client ID", "Settings")]
         public string ClientId { get; set; }
         
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
-        [PropertyClassification(1, "Experian Client Secret", "Settings")]
+        [PropertyClassification(4, "Experian Client Secret", "Settings")]
         public string ClientSecret { get; set; }
         
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
-        [PropertyClassification(1, "Experian Client Reference ID", "Settings")]
+        [PropertyClassification(5, "Experian Client Reference ID", "Settings")]
         public string ClientReferenceId { get; set; }
         
         public event PropertyChangedEventHandler PropertyChanged;
