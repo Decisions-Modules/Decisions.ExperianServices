@@ -7,12 +7,13 @@ using DecisionsFramework.Design.Flow;
 using DecisionsFramework.Design.Flow.Interface;
 using DecisionsFramework.Design.Flow.Mapping;
 using DecisionsFramework.Design.Properties;
+using DecisionsFramework.Design.Properties.Attributes;
 using DecisionsFramework.ServiceLayer;
 
 namespace Decisions.ExperianServices
 {
     [Writable]
-    public abstract class AbstractExperianStep : IFlowAwareStep, ISyncStep, IDataConsumer, INotifyPropertyChanged, IValidationSource
+    public abstract class AbstractExperianStep : IFlowAwareStep, ISyncStep, INotifyPropertyChanged, IValidationSource
     {
         protected static readonly Log Log = new(ExperianConstants.LogCat);
         
@@ -20,18 +21,7 @@ namespace Decisions.ExperianServices
         protected const string CreditReportResponseText = "CreditReportResponse";
         protected const string PreQualificationResponseText = "PreQualificationReportResponse";
         protected const string VerifyResponseText = "VerifyResponse";
-        private const string ClientReferenceIdText = "Client Reference ID";
-        private const string ApiUsernameText = "API Username";
-        private const string ApiPasswordText = "API Password";
-        private const string ClientIdText = "Client ID";
-        private const string ClientSecretText = "Client Secret";
 
-        protected string UserName = "";
-        protected string Password = "";
-        protected string ClientId = "";
-        protected string ClientSecret = "";
-        protected string ClientReferenceId = ""; 
-        
         [PropertyHidden] 
         public Flow Flow { get; set; }
         
@@ -50,28 +40,29 @@ namespace Decisions.ExperianServices
             {
                 _overrideCredentials = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(InputData));
             }
         }
         
-        public virtual DataDescription[] InputData
-        {
-            get
-            {
-                List<DataDescription> inputs = new List<DataDescription>();
-
-                if (_overrideCredentials)
-                {
-                    inputs.Add(new DataDescription(typeof(string), ClientReferenceIdText));
-                    inputs.Add(new DataDescription(typeof(string), ApiUsernameText));
-                    inputs.Add(new DataDescription(typeof(string), ApiPasswordText));
-                    inputs.Add(new DataDescription(typeof(string), ClientIdText));
-                    inputs.Add(new DataDescription(typeof(string), ClientSecretText));
-                }
-
-                return inputs.ToArray();
-            }
-        }
+        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyClassification(1, "Settings")]
+        public string UserName { get; set; }
+        
+        [PasswordText]
+        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyClassification(1, "Settings")]
+        public string Password { get; set; }
+        
+        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyClassification(1, "Settings")]
+        public string ClientId { get; set; }
+        
+        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyClassification(1, "Settings")]
+        public string ClientSecret { get; set; }
+        
+        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyClassification(1, "Settings")]
+        public string ClientReferenceId { get; set; }
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -83,37 +74,6 @@ namespace Decisions.ExperianServices
         public abstract ResultData Run(StepStartData data);
         
         public abstract OutcomeScenarioData[] OutcomeScenarios { get; }
-
-        protected void SetUpInputVariables(StepStartData data)
-        {
-            if (OverrideCredentials)
-            {
-                if (data.ContainsKey(ApiUsernameText) && data[ApiUsernameText] != null)
-                {
-                    UserName = data[ApiUsernameText] as string;
-                }
-                
-                if (data.ContainsKey(ApiPasswordText) && data[ApiPasswordText] != null)
-                {
-                    Password = data[ApiPasswordText] as string;
-                }
-                
-                if (data.ContainsKey(ClientIdText) && data[ClientIdText] != null)
-                {
-                    ClientId = data[ClientIdText] as string;
-                }
-                
-                if (data.ContainsKey(ClientSecretText) && data[ClientSecretText] != null)
-                {
-                    ClientSecret = data[ClientSecretText] as string;
-                }
-                
-                if (data.ContainsKey(ClientReferenceIdText) && data[ClientReferenceIdText] != null)
-                {
-                    ClientReferenceId = data[ClientReferenceIdText] as string;
-                }
-            }
-        }
 
         public virtual ValidationIssue[] GetValidationIssues()
         {

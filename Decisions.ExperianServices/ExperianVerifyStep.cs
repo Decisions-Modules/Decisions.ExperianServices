@@ -12,8 +12,6 @@ namespace Decisions.ExperianServices
         public override ResultData Run(StepStartData data)
         {
             ExperianVerifyRequest request = data[RequestText] as ExperianVerifyRequest;
-
-            SetUpInputVariables(data);
             
             //Executing Oauth2 Request
             Log.Debug("Executing Oauth2 Request");

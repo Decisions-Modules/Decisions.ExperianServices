@@ -7,7 +7,7 @@ using DecisionsFramework.ServiceLayer;
 
 namespace Decisions.ExperianServices
 {
-    public abstract class AbstractVerifyStep : AbstractExperianStep
+    public abstract class AbstractVerifyStep : AbstractExperianStep, IDataConsumer
     {
         protected const string SubCodeText = "Sub Code";
         
@@ -15,13 +15,11 @@ namespace Decisions.ExperianServices
         
         public abstract override ResultData Run(StepStartData data);
 
-        public override DataDescription[] InputData
+        public DataDescription[] InputData
         {
             get
             {
-                DataDescription[] inputData = base.InputData;
-                
-                List<DataDescription> inputs = new List<DataDescription>(inputData)
+                List<DataDescription> inputs = new List<DataDescription>()
                 {
                     new (typeof(ExperianVerifyRequest), RequestText)
                 };

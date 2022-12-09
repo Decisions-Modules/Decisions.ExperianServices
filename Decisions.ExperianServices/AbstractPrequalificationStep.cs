@@ -7,22 +7,18 @@ using DecisionsFramework.ServiceLayer;
 
 namespace Decisions.ExperianServices
 {
-    public abstract class AbstractPrequalificationStep : AbstractExperianStep
+    public abstract class AbstractPrequalificationStep : AbstractExperianStep, IDataConsumer
     {
         public abstract override ResultData Run(StepStartData data);
         
-        public override DataDescription[] InputData
+        public DataDescription[] InputData
         {
             get
             {
-                DataDescription[] inputData = base.InputData;
-                
-                List<DataDescription> inputs = new List<DataDescription>(inputData)
+                return new DataDescription[]
                 {
                     new (typeof(ExperianPrequalificationRequest), RequestText)
                 };
-
-                return inputs.ToArray();
             }
         }
 

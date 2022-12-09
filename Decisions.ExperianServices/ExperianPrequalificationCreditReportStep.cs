@@ -13,8 +13,6 @@ namespace Decisions.ExperianServices
         {
             ExperianPrequalificationRequest request = data[RequestText] as ExperianPrequalificationRequest;
 
-            SetUpInputVariables(data);
-
             //Executing Oauth2 Request
             Log.Debug("Executing Oauth2 Request");
             AuthenticationUtility.ExecuteAuthRequest(ExperianApi.Prequalification, OverrideCredentials, UserName, Password, ClientId, ClientSecret);

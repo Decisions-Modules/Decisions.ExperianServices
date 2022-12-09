@@ -13,8 +13,6 @@ namespace Decisions.ExperianServices
         {
             ExperianCreditReportRequest request = data[RequestText] as ExperianCreditReportRequest;
 
-            SetUpInputVariables(data);
-
             //Executing Oauth2 Request
             Log.Debug("Executing Oauth2 Request");
             AuthenticationUtility.ExecuteAuthRequest(ExperianApi.CreditProfile, OverrideCredentials, UserName, Password, ClientId, ClientSecret);
