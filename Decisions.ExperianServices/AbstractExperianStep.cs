@@ -8,6 +8,7 @@ using DecisionsFramework.Design.Flow.Interface;
 using DecisionsFramework.Design.Flow.Mapping;
 using DecisionsFramework.Design.Properties;
 using DecisionsFramework.Design.Properties.Attributes;
+using DecisionsFramework.ProjectConversion.DMN;
 using DecisionsFramework.ServiceLayer;
 
 namespace Decisions.ExperianServices
@@ -40,27 +41,28 @@ namespace Decisions.ExperianServices
             {
                 _overrideCredentials = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(InputData));
             }
         }
         
-        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(1, "Settings")]
         public string UserName { get; set; }
         
         [PasswordText]
-        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(1, "Settings")]
         public string Password { get; set; }
         
-        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(1, "Settings")]
         public string ClientId { get; set; }
         
-        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(1, "Settings")]
         public string ClientSecret { get; set; }
         
-        [PropertyHiddenByValue(nameof(OverrideCredentials))]
+        [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(1, "Settings")]
         public string ClientReferenceId { get; set; }
         
