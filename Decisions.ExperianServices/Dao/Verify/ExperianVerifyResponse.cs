@@ -116,7 +116,7 @@ namespace Decisions.ExperianServices.Dao.Verify
         public string CountryCode { get; set; }
 
         [JsonProperty("postalCode")]
-        public long PostalCode { get; set; }
+        public string PostalCode { get; set; }
     }
 
     [DataContract]
