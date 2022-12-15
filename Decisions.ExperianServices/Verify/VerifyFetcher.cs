@@ -13,13 +13,12 @@ namespace Decisions.ExperianServices.Verify
          */
         public static ExperianVerifyResponse ExecuteVerifyRequest(ExperianVerifyRequest request, 
             VerifyType type,
+            string subCode,
             bool overrideCredentials = false, 
-            string clientReferenceId = "", 
-            string subCode = "")
+            string clientReferenceId = ""
+            )
         {
             clientReferenceId = overrideCredentials ? clientReferenceId : ModuleSettingsAccessor<ExperianSettings>.Instance.ExperianClientReferenceId;
-            
-            subCode = overrideCredentials ? subCode : ModuleSettingsAccessor<ExperianSettings>.Instance.VerifySubCode;
 
             if (string.IsNullOrEmpty(clientReferenceId))
             {

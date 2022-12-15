@@ -17,22 +17,14 @@ namespace Decisions.ExperianServices
             Log.Debug("Executing Oauth2 Request");
             AuthenticationUtility.ExecuteAuthRequest(ExperianApi.Verify, OverrideCredentials, UserName, Password, ClientId, ClientSecret);
 
-            if (OverrideCredentials)
-            {
-                if (data.ContainsKey(SubCodeText) && data[SubCodeText] != null)
-                {
-                    SubCode = data[SubCodeText] as string;
-                }
-            }
-            
             //Executing Verify Request
             Log.Debug("Executing Verify Fetch");
             ExperianVerifyResponse response = VerifyFetcher.ExecuteVerifyRequest(
                 request, 
-                VerifyType.Verify, 
+                VerifyType.Verify,
+                request?.Requestor.SubscriberCode,
                 OverrideCredentials, 
-                ClientReferenceId, 
-                SubCode);
+                ClientReferenceId);
             Dictionary<string, object> results = new Dictionary<string, object>
             {
                 [VerifyResponseText] = response
