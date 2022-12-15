@@ -41,6 +41,11 @@ namespace Decisions.ExperianServices
             {
                 _overrideCredentials = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(UserName));
+                OnPropertyChanged(nameof(Password));
+                OnPropertyChanged(nameof(ClientId));
+                OnPropertyChanged(nameof(ClientSecret));
+                OnPropertyChanged(nameof(ClientReferenceId));
                 OnPropertyChanged(nameof(InputData));
             }
         }
