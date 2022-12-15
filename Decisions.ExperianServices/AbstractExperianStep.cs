@@ -49,32 +49,82 @@ namespace Decisions.ExperianServices
                 OnPropertyChanged(nameof(InputData));
             }
         }
+
+        [WritableValue] 
+        private string userName;
         
-        [WritableValue]
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(1, "Experian Username", "Settings")]
-        public string UserName { get; set; }
+        public string UserName
+        {
+            get => userName;
+            set
+            {
+                userName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [WritableValue] 
+        private string password;
         
-        [WritableValue]
         [PasswordText]
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(2, "Experian Password", "Settings")]
-        public string Password { get; set; }
+        public string Password
+        {
+            get => password;
+            set
+            {
+                password = value;
+                OnPropertyChanged(); 
+            }
+        }
+
+        [WritableValue] 
+        private string clientId;
         
-        [WritableValue]
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(3, "Experian Client ID", "Settings")]
-        public string ClientId { get; set; }
+        public string ClientId
+        {
+            get => clientId;
+            set
+            {
+                clientId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [WritableValue] 
+        private string clientSecret;
         
-        [WritableValue]
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(4, "Experian Client Secret", "Settings")]
-        public string ClientSecret { get; set; }
+        public string ClientSecret
+        {
+            get => clientSecret;
+            set
+            {
+                clientSecret = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [WritableValue] 
+        private string clientReferenceId;
         
-        [WritableValue]
         [PropertyHiddenByValue(nameof(OverrideCredentials), false, true)]
         [PropertyClassification(5, "Experian Client Reference ID", "Settings")]
-        public string ClientReferenceId { get; set; }
+        public string ClientReferenceId
+        {
+            get => clientReferenceId;
+            set
+            {
+                clientReferenceId = value;
+                OnPropertyChanged();
+            }
+        }
         
         public event PropertyChangedEventHandler PropertyChanged;
 
