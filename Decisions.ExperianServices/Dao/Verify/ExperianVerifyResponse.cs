@@ -31,7 +31,7 @@ namespace Decisions.ExperianServices.Dao.Verify
         public string ReportType { get; set; }
 
         [JsonProperty("reportGeneratedDate")]
-        public long ReportGeneratedDate { get; set; }
+        public string ReportGeneratedDate { get; set; }
 
         [JsonProperty("requestor")]
         public Requestor Requestor { get; set; }
@@ -54,7 +54,7 @@ namespace Decisions.ExperianServices.Dao.Verify
     public class EmploymentHistory
     {
         [JsonProperty("asOfDate")]
-        public long AsOfDate { get; set; }
+        public string AsOfDate { get; set; }
 
         [JsonProperty("originReportId")]
         public string OriginReportId { get; set; }
@@ -63,7 +63,7 @@ namespace Decisions.ExperianServices.Dao.Verify
         public string OriginSourceId { get; set; }
 
         [JsonProperty("employerIdentificationNumber")]
-        public long EmployerIdentificationNumber { get; set; }
+        public string EmployerIdentificationNumber { get; set; }
 
         [JsonProperty("employerName")]
         public string EmployerName { get; set; }
