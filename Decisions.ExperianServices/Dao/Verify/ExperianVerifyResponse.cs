@@ -135,12 +135,24 @@ namespace Decisions.ExperianServices.Dao.Verify
     public class ReportCustomLabels
     {
         [JsonProperty("label1")]
-        public Label1 Label1 { get; set; }
+        public Label Label1 { get; set; }
+        
+        [JsonProperty("label2")]
+        public Label Label2 { get; set; }
+
+        [JsonProperty("label3")]
+        public Label Label3 { get; set; }
+
+        [JsonProperty("label4")]
+        public Label Label4 { get; set; }
+
+        [JsonProperty("label5")]
+        public Label Label5 { get; set; }
     }
 
     [DataContract]
     [Writable]
-    public class Label1
+    public class Label
     {
         [JsonProperty("name")]
         public string Name { get; set; }

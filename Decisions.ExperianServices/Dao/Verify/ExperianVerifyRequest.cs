@@ -43,6 +43,11 @@ namespace Decisions.ExperianServices.Dao.Verify
         [WritableValue]
         [JsonProperty("customOptions")]
         public CustomOptions CustomOptions { get; set; }
+        
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("reportCustomLabels")]
+        public ReportCustomLabels ReportCustomLabels { get; set; }
     }
     
     [DataContract]
