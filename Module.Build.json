@@ -1,0 +1,19 @@
+{
+	"Resources": {
+	  "NoComponents": true,
+      "CoreServicesDlls": [
+        "./Decisions.ExperianServices/obj/Decisions.ExperianServices.dll"
+      ],
+      "CliDlls": null,
+      "WebPages": "",
+      "SilverlightDlls": null,
+      "AgentDlls": null,
+      "InstallScript": null,
+      "SqlScripts": null,
+      "ObjectsToImport": null,
+      "MsSqlScript": null
+    },
+    "Version": "8.10.0",
+    "ImagePath": "./image.png",
+    "Description": "The Experian Services Module allows the fetching and processing report data from both Experian and Clarity services. There \n\tare several types of report steps present that each provide a different set of data."
+}
