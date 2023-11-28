@@ -13,7 +13,7 @@
       "ObjectsToImport": null,
       "MsSqlScript": null
     },
-    "Version": "8.15.0",
+    "Version": "9.0.0",
     "ImagePath": "./image.png",
     "Description": "The Experian Services Module allows the fetching and processing report data from both Experian and Clarity services. There \n\tare several types of report steps present that each provide a different set of data."
 }
