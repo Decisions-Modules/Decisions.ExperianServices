@@ -1,2 +1,1 @@
-﻿# Decisions.ExperianServices
-Experian Module from Decisions Closed Source Releases.
+Decisions Documentation: https://documentation.decisions.com/docs/experian-module
