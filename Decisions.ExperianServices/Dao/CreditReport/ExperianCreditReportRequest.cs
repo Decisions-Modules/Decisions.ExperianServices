@@ -1,4 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
+using DecisionsFramework.Data.DataTypes;
 using DecisionsFramework.Design.ConfigurationStorage.Attributes;
 using Newtonsoft.Json;
 
@@ -472,6 +474,31 @@ namespace Decisions.ExperianServices.Dao.CreditReport
         [WritableValue]
         [JsonProperty("optionId")]
         public string[] OptionId { get; set; }
+
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("transactionalFilters")]
+        public TransactionalFilters TransactionalFilters { get; set; }
+    }
+
+    [DataContract]
+    [Writable]
+    public class TransactionalFilters
+    {
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("minFieldCheck")]
+        public string MinFieldCheck { get; set; }
+        
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("lookBack")]
+        public string LookBack { get; set; }
+        
+        [DataMember]
+        [WritableValue]
+        [JsonProperty("workStatus")]
+        public string WorkStatus { get; set; }
     }
 
     [DataContract]
