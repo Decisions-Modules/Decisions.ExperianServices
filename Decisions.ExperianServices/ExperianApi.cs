@@ -4,6 +4,7 @@
     {
         CreditProfile,
         Prequalification,
-        Verify
+        Verify,
+        PremierProfiles
     }
 }

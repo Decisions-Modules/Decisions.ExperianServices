@@ -60,6 +60,10 @@ namespace Decisions.ExperianServices.Utilities
                     request.ClientId = overrideCredentials ? finalClientId : ModuleSettingsAccessor<ExperianSettings>.Instance.VerifyClientId;
                     request.ClientSecret = overrideCredentials ? finalClientSecret : ModuleSettingsAccessor<ExperianSettings>.Instance.VerifyClientSecret;
                     break;
+                case ExperianApi.PremierProfiles:
+                    request.ClientId = overrideCredentials ? finalClientId : ModuleSettingsAccessor<ExperianSettings>.Instance.PremierProfilesClientId;
+                    request.ClientSecret = overrideCredentials ? finalClientSecret : ModuleSettingsAccessor<ExperianSettings>.Instance.PremierProfilesClientSecret;
+                    break;
             }
 
             if (string.IsNullOrEmpty(request.ClientId) || string.IsNullOrEmpty(request.ClientSecret) ||
