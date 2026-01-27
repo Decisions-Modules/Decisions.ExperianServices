@@ -65,6 +65,7 @@ namespace Decisions.ExperianServices
         public string VerifyClientSecret { get; set; }
         
         [WritableValue]
+        [ORMField]
         [PropertyClassification(50, "Enable Clarity", "Experian")]
         public bool EnableClarity { get; set; }
 
